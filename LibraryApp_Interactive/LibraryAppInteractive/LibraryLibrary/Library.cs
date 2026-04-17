@@ -22,7 +22,7 @@ public class Library
     #region constructor
     public Library()
     {
-
+        _bookList = new List<Book>();
     }
     #endregion
 
@@ -32,7 +32,11 @@ public class Library
     /// </summary>
     public void CreateDefaultBooks()
     {
-        
+        Book newBook = new Book("How to Write Good", "10D024");
+        newBook.Authors = [
+            "Steve Stevenson",
+            "John Johnson"
+            ];
     }
 
 

@@ -14,13 +14,14 @@ public class PaperBook : Book
     #region constructor
     public PaperBook(string bookName, string bookISBN) : base(bookName, bookISBN)
     {
+
     }
     #endregion
 
     #region methods
     public LibraryAsset BorrowBook()
     {
-
+        
     }
     #endregion
 }

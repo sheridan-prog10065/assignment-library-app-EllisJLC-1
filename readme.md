@@ -9,3 +9,6 @@ Hi there hello, created a lot of classes and what not, after 2 months of working
 Still looking forward to working in a team at Atkins Realis this summer, always interested in working with people who are interested in learning and contributing.
 
 Anyway yes doing my thingy for this woooooooo
+
+## April 17, 2026:
+Hi there hello, I'm getting a bit stuck on figuring out how `LibraryAsset` are being organized for books, and how they'll be organized overall between different book types, since there is an `Audio` enum for `BookType` which is not specified, perhaps just a `Book` object. Will ask about it after work though.
