@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using LibraryLibrary;
 
 namespace LibraryAppInteractive;
 
@@ -16,5 +17,7 @@ public static class MauiProgram
             });
         
         return builder.Build();
+
+        builder.Services.AddSingleton<Library>();
     }
 }

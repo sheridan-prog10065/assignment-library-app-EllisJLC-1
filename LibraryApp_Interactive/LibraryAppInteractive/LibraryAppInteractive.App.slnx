@@ -2,4 +2,5 @@
   <Project Path="LibraryApp/LibraryApp.csproj">
     <Deploy />
   </Project>
+  <Project Path="LibraryLibrary/LibraryLibrary.csproj" Id="86abb1f7-a3a0-4dfa-85e5-4cef81e5a0a7" />
 </Solution>
