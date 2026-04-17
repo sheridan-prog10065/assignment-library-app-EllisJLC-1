@@ -9,38 +9,74 @@ namespace LibraryLibrary;
 /// </summary>
 public class Library
 {
+    #region fieldvars
     private List<Book> _bookList;
     private int _libIDGeneratorSeed;
     private Random _random;
-    public const int DEFAULT_LIBID_START = 100;
+    #endregion
 
+    #region constants
+    public const int DEFAULT_LIBID_START = 100;
+    #endregion
+
+    #region constructor
     public Library()
     {
 
     }
+    #endregion
 
+    #region methods
+    /// <summary>
+    /// Create a set of default books to add to library
+    /// </summary>
     public void CreateDefaultBooks()
     {
-
+        
     }
 
+
+    /// <summary>
+    /// Using random, create a method that determines libId to be used for new books to be added
+    /// </summary>
+    /// <returns></returns>
     public int DetermineLibId()
     {
-
+        
     }
 
+    /// <summary>
+    /// Create a new book with given data, return created book?
+    /// </summary>
+    /// <param name="bookName"></param>
+    /// <param name="bookISBN"></param>
+    /// <param name="authors"></param>
+    /// <param name="bookType"></param>
+    /// <param name="nCopies"></param>
+    /// <returns></returns>
     public Book RegisterBook(string bookName, string bookISBN, string[] authors, BookType bookType, int nCopies)
     {
-
+        
     }
 
+    /// <summary>
+    /// Find book by name
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public Book FindBookByName(string name)
     {
-
+        
     }
 
+    /// <summary>
+    /// Find book by ISBN
+    /// </summary>
+    /// <param name="ISBN"></param>
+    /// <returns></returns>
     public Book FindBookByISBN(string ISBN) 
     { 
         
     }
+    #endregion
 }

@@ -9,6 +9,12 @@ public partial class LibraryBrowsePage : ContentPage
         InitializeComponent();
     }
 
+
+    /// <summary>
+    /// Search for a book function
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public void OnSearchBook(object sender, EventArgs e)
     {
         try
@@ -20,6 +26,12 @@ public partial class LibraryBrowsePage : ContentPage
         }
     }
 
+
+    /// <summary>
+    /// Borrow a book
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public void OnBorrowBook(object sender, EventArgs e)
     {
         try
@@ -31,6 +43,12 @@ public partial class LibraryBrowsePage : ContentPage
 
         }
     }
+
+    /// <summary>
+    /// Return book
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
 
     public void OnReturnBook(object sender, EventArgs e)
     {

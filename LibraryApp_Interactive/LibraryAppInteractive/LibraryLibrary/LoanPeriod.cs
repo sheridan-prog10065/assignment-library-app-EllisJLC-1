@@ -6,16 +6,21 @@ namespace LibraryLibrary;
 
 public struct LoanPeriod
 {
+    #region fieldvars
     DateTime _borrowedOn;
     DateTime _returnedOn;
     DateTime _dueDate;
+    #endregion
 
+    #region constructor
     public LoanPeriod(DateTime borrowedOn, DateTime returnedOn)
     {
         _borrowedOn = borrowedOn;
         _returnedOn = returnedOn;
     }
+    #endregion
 
+    #region properties
     public DateTime BorrowedOn
     {
         get { return _borrowedOn; }
@@ -52,4 +57,5 @@ public struct LoanPeriod
             }
         }
     }
+    #endregion
 }

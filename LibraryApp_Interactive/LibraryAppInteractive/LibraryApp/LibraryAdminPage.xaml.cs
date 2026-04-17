@@ -14,6 +14,11 @@ public partial class LibraryAdminPage : ContentPage
         InitializeComponent();
     }
 
+    /// <summary>
+    /// Handle registration of new book
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public void OnRegisterBook(object sender, EventArgs e)
     {
         try
@@ -26,6 +31,11 @@ public partial class LibraryAdminPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Show book assets, probably uses a search
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public void OnDisplayBookAssets(object sender, EventArgs e)
     {
         try

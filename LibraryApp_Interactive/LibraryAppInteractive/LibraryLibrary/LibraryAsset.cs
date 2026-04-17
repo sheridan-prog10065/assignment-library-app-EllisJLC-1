@@ -6,17 +6,22 @@ namespace LibraryLibrary;
 
 public class LibraryAsset
 {
+    #region fieldvars
     Book _book;
     int _libID;
     AssetStatus _status;
     LoanPeriod _loanPeriod;
+    #endregion
 
+    #region constructor
     public LibraryAsset(int libID, Book book)
     {
         _libID = libID;
         _book = book;
     }
+    #endregion
 
+    #region properties
     public int LibID
     {
         get { return _libID; }
@@ -57,4 +62,5 @@ public class LibraryAsset
             }
         }
     }
+    #endregion
 }
