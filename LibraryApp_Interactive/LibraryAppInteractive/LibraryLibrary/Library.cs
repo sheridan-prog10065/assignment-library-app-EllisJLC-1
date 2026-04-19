@@ -1,3 +1,5 @@
+using System.Xml.Linq;
+
 namespace LibraryLibrary;
 
 /// <summary>
@@ -12,7 +14,8 @@ public class Library
     #region fieldvars
     private List<Book> _bookList;
     private int _libIDGeneratorSeed;
-    private Random _random;
+    private Random _randomID;
+    private Random _randomETC;
     #endregion
 
     #region constants
@@ -23,6 +26,9 @@ public class Library
     public Library()
     {
         _bookList = new List<Book>();
+        _libIDGeneratorSeed = DEFAULT_LIBID_START;
+        _randomID = new Random(_libIDGeneratorSeed);
+        _randomETC = new Random();
     }
     #endregion
 
@@ -32,11 +38,31 @@ public class Library
     /// </summary>
     public void CreateDefaultBooks()
     {
-        Book newBook = new Book("How to Write Good", "10D024");
+        PaperBook newBook = new PaperBook("How to Write Good", "10D-024");
         newBook.Authors = [
             "Steve Stevenson",
             "John Johnson"
             ];
+
+        for (int iBook = 0; iBook < 5; iBook++)
+        {
+            LibraryAsset newAsset = new LibraryAsset(DetermineLibId(), newBook);
+            newBook.AddLibAssets(newAsset);
+        }
+        _bookList.Add(newBook);
+
+        DigitalBook newDigitalBook = new DigitalBook("How to Read Good", "20E-292");
+        newDigitalBook.Authors = [
+            "John Doe",
+            "Jane Doe"
+            ];
+
+        for (int iBook = 0; iBook < 3; iBook++)
+        {
+            LibraryAsset newAsset = new LibraryAsset(DetermineLibId(), newDigitalBook);
+            newDigitalBook.AddLibAssets(newAsset);
+        }
+        _bookList.Add(newDigitalBook);
     }
 
 
@@ -46,7 +72,7 @@ public class Library
     /// <returns></returns>
     public int DetermineLibId()
     {
-        
+        return _randomID.Next(99999);    
     }
 
     /// <summary>
@@ -58,9 +84,18 @@ public class Library
     /// <param name="bookType"></param>
     /// <param name="nCopies"></param>
     /// <returns></returns>
-    public Book RegisterBook(string bookName, string bookISBN, string[] authors, BookType bookType, int nCopies)
+    public void RegisterBook(string bookName, string bookISBN, string[] authors, BookType bookType, int nCopies)
     {
-        
+        if (bookType == BookType.Paper)
+        {
+            PaperBook newBook = new PaperBook(bookName, bookISBN);
+            newBook.Authors = authors;
+        }
+        else if (bookType == BookType.Audio || bookType == BookType.Digital)
+        {
+            DigitalBook newBook = new DigitalBook(bookName, bookISBN);
+        }
+
     }
 
     /// <summary>
@@ -70,7 +105,8 @@ public class Library
     /// <returns></returns>
     public Book FindBookByName(string name)
     {
-        
+        Book searchResult = _bookList.Find(book =>  book.Name == name);
+        return searchResult;
     }
 
     /// <summary>
@@ -79,8 +115,9 @@ public class Library
     /// <param name="ISBN"></param>
     /// <returns></returns>
     public Book FindBookByISBN(string ISBN) 
-    { 
-        
+    {
+        Book searchResult = _bookList.Find(book => book.ISBN == ISBN);
+        return searchResult;
     }
     #endregion
 }

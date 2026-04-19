@@ -18,6 +18,7 @@ public class LibraryAsset
     {
         _libID = libID;
         _book = book;
+        _status = AssetStatus.Available;
     }
     #endregion
 

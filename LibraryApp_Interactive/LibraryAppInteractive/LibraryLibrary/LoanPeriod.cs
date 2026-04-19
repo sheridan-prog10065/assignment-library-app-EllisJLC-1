@@ -13,10 +13,10 @@ public struct LoanPeriod
     #endregion
 
     #region constructor
-    public LoanPeriod(DateTime borrowedOn, DateTime returnedOn)
+    public LoanPeriod(DateTime borrowedOn, DateTime dueDate)
     {
         _borrowedOn = borrowedOn;
-        _returnedOn = returnedOn;
+        _dueDate = dueDate;
     }
     #endregion
 
@@ -44,17 +44,11 @@ public struct LoanPeriod
         get { return DateTime.Now - _borrowedOn; }
     }
 
-    public TimeSpan? LatePeriod
+    public TimeSpan LatePeriod
     {
         get
         {
-            if (DateTime.Now > _dueDate)
-            {
-                return null;
-            } else
-            {
-                return _dueDate - DateTime.Now;
-            }
+            return (TimeSpan)(_dueDate - DateTime.Now);
         }
     }
     #endregion

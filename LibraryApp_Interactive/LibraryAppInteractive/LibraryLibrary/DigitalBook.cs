@@ -8,12 +8,14 @@ public class DigitalBook : Book
 {
     #region fieldvars
     int _maxBorrowDays;
-    float _latePentalty;
+    float _latePenalty;
     #endregion
 
     #region constructor
     public DigitalBook(string bookName, string bookISBN) : base(bookName, bookISBN)
     {
+        _bookName = bookName;
+        _ISBN = bookISBN;
     }
     #endregion
 
@@ -22,9 +24,10 @@ public class DigitalBook : Book
     /// <summary>
     /// Get loan license
     /// </summary>
-    public void DetermineLoanLicense()
+    public void DetermineLoanLicense(Random random)
     {
-
+        _maxBorrowDays = random.Next(2 * 7, 8 * 7);
+        _latePenalty = 0.1f + (float)(random.NextDouble() * 0.4);
     }
 
     /// <summary>
@@ -33,7 +36,13 @@ public class DigitalBook : Book
     /// <returns></returns>
     public LibraryAsset BorrowBook()
     {
+        (bool available, LibraryAsset asset) = CheckAvailability();
+        asset.Status = AssetStatus.Loaned;
 
+        LoanPeriod loan = new LoanPeriod();
+        loan.DueDate = DateTime.Now.AddDays(_maxBorrowDays);
+        asset.Loan = loan;
+        return asset;
     }
 
     /// <summary>
@@ -41,9 +50,16 @@ public class DigitalBook : Book
     /// </summary>
     /// <param name="libID"></param>
     /// <returns></returns>
-    public (TimeSpan, int, decimal) ReturnBook(int libID)
+    public override (TimeSpan, int, decimal) ReturnBook(int libID)
     {
+        (TimeSpan loanTime, int daysLate, decimal lateFee) = base.ReturnBook(libID);
 
+        if (daysLate != null)
+        {
+            lateFee = (decimal)daysLate * (decimal)_latePenalty;
+        }
+
+        return (loanTime, daysLate, lateFee);
     }
     #endregion
 
