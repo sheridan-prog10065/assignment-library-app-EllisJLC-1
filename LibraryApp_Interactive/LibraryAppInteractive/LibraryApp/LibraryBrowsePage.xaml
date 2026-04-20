@@ -3,8 +3,98 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LibraryAppInteractive.LibraryBrowsePage"
              Title="Browse Interactive Library">
-			 
-	<Label Text="Browse Library page for the Interactive Library App"
-	       HorizontalOptions="Center"
-	       VerticalOptions="Center"/> 
+
+    <Grid
+        RowDefinitions="*, *, *, *" 
+        ColumnDefinitions="*, *, *, *, *, *"
+        >
+        <Label
+            Grid.Column="0"
+            Grid.Row="0"
+            Grid.ColumnSpan="3"
+            Text="Library catalogue"
+            WidthRequest="400"
+            FontSize="30"
+            Margin="20, 40, 0, 0"
+            HorizontalOptions="Start"
+            />
+        <Border
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Margin="20"
+            >
+            <CollectionView
+                x:Name="_colBooks"
+                HorizontalOptions="Fill"
+                SelectionMode="Single"
+                >
+            </CollectionView>
+        </Border>
+
+        <Label
+            Grid.Column="3"
+            Grid.Row="0"
+            Grid.ColumnSpan="3"
+            Text="Book Availability"
+            WidthRequest="400"
+            FontSize="30"
+            Margin="20, 40, 0, 0"
+            HorizontalOptions="Start"
+            />
+        
+        <Border
+            Grid.Column="3"
+            Grid.ColumnSpan="3"
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Margin="20"
+            >
+                <CollectionView
+                    x:Name="_colAssets"
+                    HorizontalOptions="Fill"
+                    SelectionMode="Single"
+                    >
+                </CollectionView>
+        </Border>
+        <Button
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="Search"
+            HeightRequest="40"
+            Margin="20"
+            Clicked="OnSearchBook"
+            />
+        
+        <Button
+            Grid.Row="3"
+            Grid.Column="3"
+            Text="Check out"
+            HeightRequest="40"
+            Margin="20"
+            Clicked="OnBorrowBook"
+            />
+
+        <Button
+            Grid.Row="3"
+            Grid.Column="4"
+            Text="Reserve"
+            HeightRequest="40"
+            Margin="20"
+            Clicked="OnReserveBook"
+            />
+
+        <Button
+            Grid.Row="3"
+            Grid.Column="5"
+            Text="Return"
+            HeightRequest="40"
+            Margin="20"
+            Clicked="OnReturnBook"
+            />
+    </Grid>
+    
+    
+    
 </ContentPage>

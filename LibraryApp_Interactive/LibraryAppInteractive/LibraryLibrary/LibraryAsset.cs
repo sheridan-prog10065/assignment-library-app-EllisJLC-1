@@ -1,0 +1,95 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace LibraryLibrary;
+
+public class LibraryAsset
+{
+    #region fieldvars
+    Book _book;
+    int _libID;
+    AssetStatus _status;
+    LoanPeriod _loanPeriod;
+    #endregion
+
+    #region constructor
+    public LibraryAsset(int libID, Book book)
+    {
+        _libID = libID;
+        _book = book;
+        _status = AssetStatus.Available;
+    }
+    #endregion
+
+    #region properties
+    public int LibID
+    {
+        get { return _libID; }
+        set { _libID = value; }
+    }
+
+    public AssetStatus Status
+    {
+        get { return _status; }
+        set { _status = value; }
+    }
+
+    public LoanPeriod Loan
+    {
+        get { return _loanPeriod; }
+        set { _loanPeriod = value; }
+    }
+
+    #region override
+    public override string ToString()
+    {
+        string status;
+
+        switch (_status)
+        {
+            case AssetStatus.Available:
+                status = "Available";
+                break;
+            case AssetStatus.Reserved:
+                status = "Reserved";
+                break;
+            case AssetStatus.Loaned:
+                status = "Loaned";
+                break;
+            case AssetStatus.NotAvailable:
+                status = "Not Available";
+                break;
+            default:
+                status = "Error";
+                break;
+        }
+
+        return $"{_libID}: {_book.Name} => {status}";
+    }
+    #endregion
+
+    public bool IsAvailable
+    {
+        get { 
+            switch (_status)
+            {
+                case AssetStatus.Available:
+                    return true;
+
+                case AssetStatus.NotAvailable:
+                    return false;
+
+                case AssetStatus.Loaned:
+                    return false;
+
+                case AssetStatus.Reserved:
+                    return false;
+
+                default:
+                    throw new ArgumentException("Book status invalid");
+            }
+        }
+    }
+    #endregion
+}

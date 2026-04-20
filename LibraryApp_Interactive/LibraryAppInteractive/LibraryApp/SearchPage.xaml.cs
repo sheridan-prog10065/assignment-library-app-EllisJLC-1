@@ -1,23 +1,18 @@
-﻿using LibraryLibrary;
+using LibraryLibrary;
 using System.Collections.ObjectModel;
 
 namespace LibraryAppInteractive;
 
-public partial class LibraryBrowsePage : ContentPage
+public partial class SearchPage : ContentPage
 {
     Library _library;
-    public LibraryBrowsePage(Library library)
-    {   
+    Book _book;
+    public SearchPage(Library library)
+    {
         InitializeComponent();
 
         _library = library;
-        ResetBooks();
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        ResetBooks();
+        _book = null;
     }
 
     /// <summary>
@@ -29,12 +24,9 @@ public partial class LibraryBrowsePage : ContentPage
     {
         try
         {
-            Book selectedBook = (Book)_colBooks.SelectedItem;
-            selectedBook.BorrowBook();
+            _book.BorrowBook();
 
             await DisplayAlertAsync("Borrowed!", "Book has been loaed", "Ok");
-
-            UpdateAssets();
         }
         catch (NullReferenceException ex)
         {
@@ -46,28 +38,30 @@ public partial class LibraryBrowsePage : ContentPage
     {
         try
         {
-            Book selectedBook = _colBooks.SelectedItem as Book;
-
-            if (selectedBook == null)
+            if (_book == null)
             {
                 throw new ArgumentNullException("Invalid Book");
             }
 
-            selectedBook.ReserveBook();
-        } catch (ArgumentNullException ex)
+            _book.ReserveBook();
+        }
+        catch (ArgumentNullException ex)
         {
             await DisplayAlertAsync("Error", "Please select a book", "Ok");
-        } catch (AssetUnavailableException ex)
+        }
+        catch (AssetUnavailableException ex)
         {
             await DisplayAlertAsync("Error", "That book cannot be reserved, please try again later", "Ok");
-        } catch (LibraryIDException ex)
+        }
+        catch (LibraryIDException ex)
         {
             await DisplayAlertAsync("Error", "A book could not be found with that id", "ok");
-        } catch
+        }
+        catch
         {
             await DisplayAlertAsync("Error", "An unknown error has occured, please contact someone who knows computers maybe", "Maybe?");
         }
-        
+
 
     }
 
@@ -84,14 +78,13 @@ public partial class LibraryBrowsePage : ContentPage
             LibraryAsset selectedAsset = (LibraryAsset)_colAssets.SelectedItem;
             int assetID = selectedAsset.LibID;
 
-            Book selectedBook = (Book)_colBooks.SelectedItem;
-            
-            (TimeSpan latePeriod, int lateDays, decimal lateFee) = selectedBook.ReturnBook(assetID);
+            (TimeSpan latePeriod, int lateDays, decimal lateFee) = _book.ReturnBook(assetID);
 
             if (lateDays != null)
             {
                 await DisplayAlertAsync("Completed", $"Book (ID: {assetID}) returned successfully", "Ok");
-            } else
+            }
+            else
             {
                 await DisplayAlertAsync("Returned late", $"Returned {lateDays} days late! Late fee: ${lateFee}.", "Aww");
             }
@@ -107,31 +100,62 @@ public partial class LibraryBrowsePage : ContentPage
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    public async void OnSearchBook(object sender, EventArgs e)
+    public async void OnSearchByTitle(object sender, EventArgs e)
     {
         try
         {
-            Book selectedBook = (Book)_colBooks.SelectedItem;
-            ObservableCollection<LibraryAsset> booksList = new ObservableCollection<LibraryAsset>(selectedBook.Assets);
-            _colAssets.ItemsSource = selectedBook.Assets;
-        } catch (InvalidCastException ex)
+            Book foundBook = _library.FindBookByName(_entTitle.Text);
+
+            _book = foundBook;
+
+            ObservableCollection<LibraryAsset> booksList = new ObservableCollection<LibraryAsset>(_book.Assets);
+            _colAssets.ItemsSource = booksList;
+
+            if (foundBook != null)
+            {
+                await DisplayAlertAsync("Success!", "Book was found", "Ok");
+            } else
+            {
+                await DisplayAlertAsync("No results", "No results were found with that title.", "Ok");
+            }
+        }
+        catch (InvalidCastException ex)
         {
             await DisplayAlertAsync("Error", "No book selected, try again", "Ok");
         }
-        
+
     }
 
-    public void ResetBooks()
+    public async void OnSearchByISBN(object sender, EventArgs e)
     {
-        ObservableCollection<Book> booksList = new ObservableCollection<Book>(_library.BooksList); 
-        _colBooks.ItemsSource = booksList;
-        _colAssets.ItemsSource = null;
-    }   
+        try
+        {
+            Book foundBook = _library.FindBookByISBN(_entISBN.Text);
+
+            _book = foundBook;
+
+            ObservableCollection<LibraryAsset> booksList = new ObservableCollection<LibraryAsset>(_book.Assets);
+            _colAssets.ItemsSource = booksList;
+
+            if (foundBook != null)
+            {
+                await DisplayAlertAsync("Success!", "Book was found", "Ok");
+            }
+            else
+            {
+                await DisplayAlertAsync("No results", "No results were found with that ISBN.", "Ok");
+            }
+        }
+        catch (InvalidCastException ex)
+        {
+            await DisplayAlertAsync("Error", "No book selected, try again", "Ok");
+        }
+    }
+
+
 
     public void UpdateAssets()
     {
-        Book selectedBook = (Book)_colBooks.SelectedItem;
-        ObservableCollection<LibraryAsset> booksList = new ObservableCollection<LibraryAsset>(selectedBook.Assets);
-        _colAssets.ItemsSource = selectedBook.Assets;
+        _colAssets.ItemsSource = _book.Assets;
     }
 }
