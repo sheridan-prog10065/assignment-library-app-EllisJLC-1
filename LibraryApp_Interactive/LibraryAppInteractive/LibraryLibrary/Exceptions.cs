@@ -19,3 +19,19 @@ public class BookNotAvailableException : Exception
 
     }
 }
+
+public class AssetUnavailableException : Exception
+{
+    public AssetUnavailableException(string message) : base(message)
+    {
+
+    }
+}
+
+public class TypeException : Exception
+{
+    public TypeException(string message) : base(message)
+    {
+
+    }
+}

@@ -60,4 +60,10 @@
     <ItemGroup>
       <ProjectReference Include="..\LibraryLibrary\LibraryLibrary.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <MauiXaml Update="SearchPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
+    </ItemGroup>
 </Project>

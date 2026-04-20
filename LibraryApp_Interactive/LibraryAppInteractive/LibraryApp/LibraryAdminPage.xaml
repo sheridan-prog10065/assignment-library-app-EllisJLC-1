@@ -5,8 +5,153 @@
              x:Class="LibraryAppInteractive.LibraryAdminPage"
              Title="Manage Book Assets">
     <ContentPage.Content>
-        <Label Text="Library Admin page for the Interactive Library App"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>         
+        <Grid
+            RowDefinitions="*, *, *, *, *, *, Auto"
+            ColumnDefinitions="*, *, *, *"
+            >
+            <Border
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.RowSpan="5"
+                Grid.ColumnSpan="2"
+                Margin="20"
+                >
+                <VerticalStackLayout>
+                    <Label
+                        Text="Add new book"
+                        HorizontalOptions="Center"
+                        FontSize="30"
+                        Margin="0, 0, 0, 20"
+                        />
+                    <Grid
+                        RowDefinitions="*, *, *"
+                        ColumnDefinitions="*, *"
+                        Margin="20, 0, 0, 0"
+                        >
+                        <VerticalStackLayout
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="20"
+                            >
+                            <Label
+                                Text="Book Name: "
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                Margin="0, 0, 0, 10"
+                                />
+                            <Entry
+                                x:Name="_entName"
+                                Placeholder="Book name"
+                                WidthRequest="200"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                />          
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="20"
+                            >
+                            <Label
+                                Text="Book ISBN: "
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                Margin="0, 0, 0, 10"
+                                />
+                            <Entry
+                                x:Name="_entISBN"
+                                Placeholder="ISBN"
+                                WidthRequest="200"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                />
+                        </VerticalStackLayout>
+
+                        <Picker
+                            Title="Book Type"
+                            x:Name="_pkrType"
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            Margin="20"
+                            >
+                            <Picker.Items>
+                                <x:String>Paper</x:String>
+                                <x:String>Digital</x:String>
+                                <x:String>Audio</x:String>
+                            </Picker.Items>
+                        </Picker>
+
+                        <VerticalStackLayout
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="20"
+                            >
+                            <Label
+                                Text="Number of copies: "
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                Margin="0, 0, 0, 10"
+                                />
+                            <Entry
+                                x:Name="_entCopies"
+                                Placeholder="Copies"
+                                WidthRequest="200"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                />
+                        </VerticalStackLayout>
+
+                        <Button
+                            Text="Register new book"
+                            Clicked="OnRegisterBook"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            HeightRequest="40"
+                            HorizontalOptions="Center"
+                            />
+
+                        <VerticalStackLayout
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="20"
+                            >
+                            <Label
+                                Text="Authors: "
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                Margin="0, 0, 0, 10"
+                                />
+                            <Entry
+                                x:Name="_entAuthors"
+                                Placeholder="Authors"
+                                WidthRequest="350"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+                
+            </Border>
+
+            <Border
+                Grid.Row="1"
+                Grid.RowSpan="5"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Margin="20"
+                >
+
+                <CollectionView
+                    x:Name="_colAssets"
+                    HorizontalOptions="Fill"
+                    >
+
+                </CollectionView>
+                
+            </Border>
+
+        </Grid>       
     </ContentPage.Content>
 </ContentPage>

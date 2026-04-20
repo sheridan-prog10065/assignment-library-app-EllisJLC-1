@@ -12,10 +12,17 @@ public class DigitalBook : Book
     #endregion
 
     #region constructor
-    public DigitalBook(string bookName, string bookISBN) : base(bookName, bookISBN)
+    public DigitalBook(string bookName, string bookISBN, bool audio = false) : base(bookName, bookISBN)
     {
         _bookName = bookName;
         _ISBN = bookISBN;
+        if (audio == true)
+        {
+            _bookType = BookType.Audio;
+        } else
+        {
+            _bookType = BookType.Digital;
+        }
     }
     #endregion
 

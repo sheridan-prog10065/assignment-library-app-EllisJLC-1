@@ -15,7 +15,6 @@ public class Library
     private List<Book> _bookList;
     private int _libIDGeneratorSeed;
     private Random _randomID;
-    private Random _randomETC;
     #endregion
 
     #region constants
@@ -28,8 +27,18 @@ public class Library
         _bookList = new List<Book>();
         _libIDGeneratorSeed = DEFAULT_LIBID_START;
         _randomID = new Random(_libIDGeneratorSeed);
-        _randomETC = new Random();
+
+        CreateDefaultBooks();
     }
+    #endregion
+
+    #region properties
+
+    public List<Book> BooksList
+    {
+        get { return _bookList; }
+    }
+
     #endregion
 
     #region methods
@@ -84,16 +93,24 @@ public class Library
     /// <param name="bookType"></param>
     /// <param name="nCopies"></param>
     /// <returns></returns>
-    public void RegisterBook(string bookName, string bookISBN, string[] authors, BookType bookType, int nCopies)
+    public Book RegisterBook(string bookName, string bookISBN, string[] authors, BookType bookType, int nCopies)
     {
         if (bookType == BookType.Paper)
         {
             PaperBook newBook = new PaperBook(bookName, bookISBN);
             newBook.Authors = authors;
+            CreateAssets(nCopies, newBook);
+            return newBook;
         }
         else if (bookType == BookType.Audio || bookType == BookType.Digital)
         {
             DigitalBook newBook = new DigitalBook(bookName, bookISBN);
+            newBook.Authors = authors;
+            CreateAssets(nCopies, newBook);
+            return newBook;
+        } else
+        {
+            throw new TypeException("Unknown book type");
         }
 
     }
@@ -105,7 +122,7 @@ public class Library
     /// <returns></returns>
     public Book FindBookByName(string name)
     {
-        Book searchResult = _bookList.Find(book =>  book.Name == name);
+        Book searchResult = _bookList.Find(book =>  book.Name.ToLower() == name.ToLower());
         return searchResult;
     }
 
@@ -116,8 +133,17 @@ public class Library
     /// <returns></returns>
     public Book FindBookByISBN(string ISBN) 
     {
-        Book searchResult = _bookList.Find(book => book.ISBN == ISBN);
+        Book searchResult = _bookList.Find(book => book.ISBN.ToLower() == ISBN.ToLower());
         return searchResult;
+    }
+
+    public void CreateAssets(int copies, Book book)
+    {
+        for (int iAsset = 0; iAsset < copies; iAsset++)
+        {
+            LibraryAsset newAsset = new LibraryAsset(DetermineLibId(), book);
+            book.Assets.Add(newAsset);
+        }
     }
     #endregion
 }

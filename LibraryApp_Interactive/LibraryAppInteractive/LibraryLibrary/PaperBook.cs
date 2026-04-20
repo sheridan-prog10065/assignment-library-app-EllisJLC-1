@@ -16,6 +16,7 @@ public class PaperBook : Book
     {
         _bookName = bookName;
         _ISBN = bookISBN;
+        _bookType = BookType.Paper;
     }
     #endregion
 

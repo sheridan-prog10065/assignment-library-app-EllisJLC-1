@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LibraryAppInteractive.SearchPage"
+             Title="SearchPage">
+    <VerticalStackLayout>
+        <Grid
+            RowDefinitions="*, *, *, *" 
+            ColumnDefinitions="*, *, *, *, *, *"
+            >
+            <Label
+                Grid.Column="0"
+                Grid.Row="0"
+                Grid.ColumnSpan="3"
+                Text="Library Search"
+                WidthRequest="400"
+                FontSize="30"
+                Margin="20, 40, 0, 0"
+                HorizontalOptions="Start"
+                />
+            <Border
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Margin="20"
+                >
+                <VerticalStackLayout>
+
+                    <HorizontalStackLayout>
+                        <Label
+                            Text="Search by book title: "
+                            Margin="10"
+                            VerticalOptions="Center"
+                            />
+                        <Entry
+                            x:Name="_entTitle"
+                            Margin="10"
+                            HeightRequest="40"
+                            WidthRequest="200"
+                            />
+                        <Button
+                            Text="Search By Title"
+                            Clicked="OnSearchByTitle"
+                            Margin="10"
+                            />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout>
+                        <Label
+                            Text="Search by book ISBN: "
+                            Margin="10"
+                            VerticalOptions="Center"
+                            />  
+                        <Entry
+                            x:Name="_entISBN"
+                            Margin="10"
+                            HeightRequest="40"
+                            WidthRequest="200"
+                            />
+                        <Button
+                            Text="Search by ISBN"
+                            Clicked="OnSearchByISBN"
+                            Margin="10"
+                            />
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Label
+                Grid.Column="3"
+                Grid.Row="0"
+                Grid.ColumnSpan="3"
+                Text="Book Availability"
+                WidthRequest="400"
+                FontSize="30"
+                Margin="20, 40, 0, 0"
+                HorizontalOptions="Start"
+                />
+
+            <Border
+                Grid.Column="3"
+                Grid.ColumnSpan="3"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Margin="20"
+                >
+                <CollectionView
+                    x:Name="_colAssets"
+                    HorizontalOptions="Fill"
+                    SelectionMode="Single"
+                    >
+                </CollectionView>
+            </Border>
+
+            <Button
+                Grid.Row="3"
+                Grid.Column="3"
+                Text="Check out"
+                HeightRequest="40"
+                Margin="20"
+                Clicked="OnBorrowBook"
+                />
+
+            <Button
+                Grid.Row="3"
+                Grid.Column="4"
+                Text="Reserve"
+                HeightRequest="40"
+                Margin="20"
+                Clicked="OnReserveBook"
+                />
+
+            <Button
+                Grid.Row="3"
+                Grid.Column="5"
+                Text="Return"
+                HeightRequest="40"
+                Margin="20"
+                Clicked="OnReturnBook"
+                />
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentPage>

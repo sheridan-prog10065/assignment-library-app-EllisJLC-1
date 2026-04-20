@@ -41,6 +41,34 @@ public class LibraryAsset
         set { _loanPeriod = value; }
     }
 
+    #region override
+    public override string ToString()
+    {
+        string status;
+
+        switch (_status)
+        {
+            case AssetStatus.Available:
+                status = "Available";
+                break;
+            case AssetStatus.Reserved:
+                status = "Reserved";
+                break;
+            case AssetStatus.Loaned:
+                status = "Loaned";
+                break;
+            case AssetStatus.NotAvailable:
+                status = "Not Available";
+                break;
+            default:
+                status = "Error";
+                break;
+        }
+
+        return $"{_libID}: {_book.Name} => {status}";
+    }
+    #endregion
+
     public bool IsAvailable
     {
         get { 

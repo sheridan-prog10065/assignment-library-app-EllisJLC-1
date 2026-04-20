@@ -11,6 +11,7 @@ public class Book
     protected string _ISBN;
     protected string[]? _bookAuthorList;
     protected List<LibraryAsset>? _libAssetList;
+    protected BookType _bookType;
     #endregion
 
     #region constructor
@@ -40,9 +41,22 @@ public class Book
         set { _bookAuthorList = value; }
     }
 
-    public IEnumerable<LibraryAsset> Assets
+    public List<LibraryAsset> Assets
     {
         get { return _libAssetList; }
+        set { _libAssetList = value; }
+    }
+    #endregion
+
+    #region override
+    public override string ToString()
+    {
+        string medium = _bookType == BookType.Paper ? "Paperback" :
+            _bookType == BookType.Audio ? "Audiobook" :
+            _bookType == BookType.Digital ? "Digital" :
+            "Error Type";
+        
+        return $"{_bookName} ({medium}) - {_ISBN}";
     }
     #endregion
 
@@ -129,6 +143,10 @@ public class Book
             libAsset.Status = AssetStatus.Reserved;
             
             return libAsset;
+        }
+        else if (libAsset == null)
+        {
+            throw new AssetUnavailableException("That book is not available. Please try again");
         }
         else
         {
