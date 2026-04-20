@@ -19,3 +19,12 @@ I spent a couple hours looking at the UML being confused, then opened the python
 I'm also going against the milestone progression that prof. Magdin uses in the assignment instructions, as I found the UML a bit confusing and wanted to make sure the logic of it all made sense first. I have built the solution to repair my bugs and will debug after I've created the full UI. A bit backward, but as a maybe a developer, I like to think that I'm fairly certain of my code (will still make mistakes) and should be fine with correcting bugs as I debug all at once since usually it's just a few small logic errors which I can realistically identify unless it's a seriously mishandled thing like returning `null` when it should return an object.
 
 Anyway yeah as planned, tomorrow will work on UI and final debugging.
+
+## April 19, 2026:
+Hi there hello, I realize I'm making a massive push all at once, but I really just didn't stop coding to think about pushing...
+
+So I realized that I forgot to add the functionality to search for books by title and ISBN, but I liked the way I implemented the browse page, so I kept it and created a new page for searching, hopefully won't be a hassle for you to test.
+
+Overall, this assignment was a welcome challenge, but the UML was difficult to understand, I had to make a couple of edits to make things work. I changed `IEnumerable<LibraryAssetList` to a `List` type instead as I was running into erros. I get that you probably expected us to figure out a way to use the interface, but I didn't really have much time after studying for the final and completing the group project (rather, babysitting my group members, unfortunately). I think the UML diagrams in this course have felt a bit misleading, or perhaps it should be noted that they're suggestions or a base/skeleton of the project so that they're not followed exactly, where students would need to try to fit the pieces together while being confused. Perhaps an assignment which lists classes and what they do, and have the student figure out the structure themself, then maybe create a UML so there's still practice of UML diagrams.
+
+Anyway, hope you, Professor Magdin, can get your year of sabatical! See you in Software Engineering and Enterprise Systems (if I'm remembering right)!!! Will try my best to take your classes there, to continue asking dumb questions and doing probably too much maybe!!!
